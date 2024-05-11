@@ -1,7 +1,7 @@
-export default function Header() {
+export default function Header({ text }) {
   return (
     <div className="header">
-      <h1>Todo list</h1>
+      <h1>{text}</h1>
       <input
         type="text"
         placeholder="Filter ToDos"

@@ -1,13 +1,17 @@
 import TodoListItem from "./TodoListItem";
-const TodoList = () => {
-  return (
-    <ul>
-      <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
-    </ul>
-  );
+const TodoList = ({ todoItems, handleDelete, handleEdit }) => {
+  const jsxArray = todoItems.map((obj) => {
+    return (
+      <TodoListItem
+        item={obj.item}
+        id={obj.id}
+        key={obj.id}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+      />
+    );
+  });
+
+  return <ul>{jsxArray}</ul>;
 };
 export default TodoList;
