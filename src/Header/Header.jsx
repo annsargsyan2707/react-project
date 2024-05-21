@@ -1,4 +1,7 @@
-export default function Header({ text }) {
+import { useState } from "react";
+
+export default function Header({ text, handleSearch }) {
+  const value = 
   return (
     <div className="header">
       <h1>{text}</h1>
