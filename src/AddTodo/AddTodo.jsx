@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const AddTodo = ({ handleAdd }) => {
   const [todoText, setTodoText] = useState("");
+
   const handleChange = (e) => {
     setTodoText(e.target.value);
   };

@@ -8,21 +8,29 @@ import AddTodo from "./AddTodo/AddTodo.jsx";
 
 const App = () => {
   const headerText = "Todo App";
-
-  const [todoItems, setTodoItems] = useState([]);
-
   const text = "add text";
 
-  const handleSearch = (text) => {
-    const newArr = arr.filter((obj) => {
-      obj.text.includes(text);
-      setTodoItems(newArr);
-    });
+  const [todoItems, setTodoItems] = useState([]);
+  const [filteredTodoItems, setFilteredTodoItems] = useState([]);
+
+  const handleSearch = (taskName) => {
+    console.log("taskName", taskName);
+    if (taskName) {
+      const newTodoItems = todoItems.filter((obj) => {
+        console.log(obj);
+        return obj.item.includes(taskName);
+      });
+      console.log("newTodoItems", newTodoItems);
+      setFilteredTodoItems(newTodoItems);
+    } else {
+      setFilteredTodoItems(todoItems);
+    }
   };
   const handleDelete = (id) => {
     console.log(`delete ${id}`);
     const newTodoItems = todoItems.filter((obj) => obj.id !== id);
     setTodoItems(newTodoItems);
+    setFilteredTodoItems(newTodoItems);
   };
 
   const handleEdit = (id) => {
@@ -35,13 +43,14 @@ const App = () => {
       id: todoItems.length ? todoItems[todoItems.length - 1].id + 1 : 1,
     });
     setTodoItems([...todoItems]);
+    setFilteredTodoItems([...todoItems]);
   };
 
   return (
     <div className="app">
       <Header text={headerText} handleSearch={handleSearch} />
       <TodoList
-        todoItems={todoItems}
+        todoItems={filteredTodoItems}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
       />
