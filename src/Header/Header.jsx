@@ -1,19 +1,11 @@
 import { useState } from "react";
 
-export default function Header({ text, handleSearch }) {
-  const [searchText, setSearchText] = useState("");
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSearchText(value);
-    handleSearch(value);
-  };
-
+export default function Header({ text, searchText, setSearchText }) {
   return (
     <div className="header">
       <h1>{text}</h1>
       <input
-        onChange={handleChange}
+        onChange={(e) => setSearchText(e.target.value)}
         value={searchText}
         type="text"
         placeholder="Filter ToDos"
