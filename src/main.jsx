@@ -10,31 +10,34 @@ const App = () => {
   const headerText = "Todo App";
   const text = "add text";
 
-  const [todoItems, setTodoItems] = useState([]); //սկսում ենք նկարել միայն filteredTodoItems ու միշտ զուգահեռ թարմացնել, բացի handleSearch ի դեպքից
-  const [filteredTodoItems, setFilteredTodoItems] = useState([]);
-
-  const handleSearch = (taskName) => {
-    console.log("taskName", taskName);
-    if (taskName) {
-      const newTodoItems = todoItems.filter((obj) => {
-        console.log(obj);
-        return obj.item.includes(taskName);
-      });
-      console.log("newTodoItems", newTodoItems);
-      setFilteredTodoItems(newTodoItems);
-    } else {
-      setFilteredTodoItems(todoItems);
-    }
-  };
+  const [todoItems, setTodoItems] = useState([]);
+  // const [filteredTodoItems, setFilteredTodoItems] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const filteredTodos = todoItems.filter((todo) =>
+    todo.item.toLowerCase().includes(searchText.toLocaleLowerCase())
+  );
+  // const handleSearch = (taskName) => {
+  //   console.log("taskName", taskName);
+  //   if (taskName) {
+  //     const newTodoItems = todoItems.filter((obj) => {
+  //       console.log(obj);
+  //       return obj.item.includes(taskName);
+  //     });
+  //     console.log("newTodoItems", newTodoItems);
+  //     setFilteredTodoItems(newTodoItems);
+  //   } else {
+  //     setFilteredTodoItems(todoItems);
+  //   }
+  // };
   const handleDelete = (id) => {
     console.log(`delete ${id}`);
     const newTodoItems = todoItems.filter((obj) => obj.id !== id);
     setTodoItems(newTodoItems);
-    setFilteredTodoItems(newTodoItems);
+    //setFilteredTodoItems(newTodoItems);
   };
 
   const handleEdit = (id) => {
-    console.log(`edit ${id}`);
+    console.log(id);
   };
 
   const handleAdd = (text) => {
@@ -43,14 +46,18 @@ const App = () => {
       id: todoItems.length ? todoItems[todoItems.length - 1].id + 1 : 1,
     });
     setTodoItems([...todoItems]);
-    setFilteredTodoItems([...todoItems]);
+    //setFilteredTodoItems([...todoItems]);
   };
 
   return (
     <div className="app">
-      <Header text={headerText} handleSearch={handleSearch} />
+      <Header
+        text={headerText}
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
       <TodoList
-        todoItems={filteredTodoItems}
+        todoItems={filteredTodos}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
       />

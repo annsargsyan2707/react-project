@@ -1,24 +1,43 @@
+import { useState } from "react";
 const TodoListItem = ({ id, item, handleDelete, handleEdit }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [inputValue, setInputValue] = useState(item);
+
+  const handleChangeInput = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
   return (
     <li className="todo-item">
-      <span className="item-text">
-        {id} {item}
-      </span>
+      {isEditing ? (
+        <input type="text" value={inputValue} onChange={handleChangeInput} />
+      ) : (
+        <span className="item-text">
+          {id} {item}
+        </span>
+      )}
       <span className="item-buttons">
         <button
           className="item-button edit-button"
           onClick={() => {
             handleEdit(id);
+            setIsEditing(!isEditing);
           }}
         >
-          Edit
+          {isEditing ? "Save" : "Edit"}
         </button>
         <button
           className="item-button"
           onClick={() => {
             handleDelete(id);
           }}
-        > Delete</button>
+        >
+          Delete
+        </button>
       </span>
     </li>
   );
