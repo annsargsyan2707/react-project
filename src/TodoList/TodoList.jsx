@@ -1,7 +1,7 @@
 import TodoListItem from "./TodoListItem";
 import { useState } from "react";
 
-const TodoList = ({ todoItems, handleDelete, handleEdit }) => {
+const TodoList = ({ todoItems, handleDelete, handleEdit, inputValue }) => {
   const jsxArray = todoItems.map((obj) => {
     return (
       <TodoListItem
@@ -10,6 +10,7 @@ const TodoList = ({ todoItems, handleDelete, handleEdit }) => {
         key={obj.id}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
+        inputValue={inputValue}
       />
     );
   });

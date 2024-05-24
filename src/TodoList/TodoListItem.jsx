@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 const TodoListItem = ({ id, item, handleDelete, handleEdit }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(item);
@@ -6,11 +7,6 @@ const TodoListItem = ({ id, item, handleDelete, handleEdit }) => {
   const handleChangeInput = (e) => {
     setInputValue(e.target.value);
   };
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
   return (
     <li className="todo-item">
       {isEditing ? (
@@ -24,7 +20,9 @@ const TodoListItem = ({ id, item, handleDelete, handleEdit }) => {
         <button
           className="item-button edit-button"
           onClick={() => {
-            handleEdit(id);
+            if (isEditing) {
+              handleEdit(id, inputValue);
+            }
             setIsEditing(!isEditing);
           }}
         >
