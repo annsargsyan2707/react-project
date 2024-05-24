@@ -10,7 +10,7 @@ const App = () => {
   const headerText = "Todo App";
   const text = "add text";
 
-  const [todoItems, setTodoItems] = useState([]);
+  const [todoItems, setTodoItems] = useState([]); //սկսում ենք նկարել միայն filteredTodoItems ու միշտ զուգահեռ թարմացնել, բացի handleSearch ի դեպքից
   const [filteredTodoItems, setFilteredTodoItems] = useState([]);
 
   const handleSearch = (taskName) => {

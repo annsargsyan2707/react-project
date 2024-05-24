@@ -11,7 +11,6 @@ const TodoListItem = ({ id, item, handleDelete, handleEdit }) => {
             handleEdit(id);
           }}
         >
-          {" "}
           Edit
         </button>
         <button
@@ -19,10 +18,7 @@ const TodoListItem = ({ id, item, handleDelete, handleEdit }) => {
           onClick={() => {
             handleDelete(id);
           }}
-        >
-          {" "}
-          Delete
-        </button>
+        > Delete</button>
       </span>
     </li>
   );
