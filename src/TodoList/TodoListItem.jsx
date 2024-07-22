@@ -7,8 +7,12 @@ const TodoListItem = ({ id, item, handleDelete, handleEdit }) => {
   const handleChangeInput = (e) => {
     setInputValue(e.target.value);
   };
+
+  const handleDragStart = (e, id) => {
+    e.dataTransfer.setData("text/plain", id);
+  };
   return (
-    <li className="todo-item">
+    <li className="todo-item" draggable="true" onDragStart={handleDragStart}>
       {isEditing ? (
         <input type="text" value={inputValue} onChange={handleChangeInput} />
       ) : (
